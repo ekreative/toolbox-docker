@@ -5,3 +5,4 @@ RUN /google-cloud-sdk/install.sh
 ENV PATH=/google-cloud-sdk/bin:$PATH
 RUN gcloud components install kubectl gsutil beta docker-credential-gcr
 RUN curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
+RUN helm init --client-only
