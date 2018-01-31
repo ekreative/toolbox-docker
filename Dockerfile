@@ -1,6 +1,7 @@
-FROM alpine:3.5
-RUN apk add --update bash gettext
-ENV KUBE_VERSION 1.5.4
-ADD https://storage.googleapis.com/kubernetes-release/release/v$KUBE_VERSION/bin/linux/amd64/kubectl /usr/local/bin/kubectl
-RUN chmod +x /usr/local/bin/kubectl
-CMD ["kubectl"]
+FROM docker:dind
+RUN apk add --no-cache python2 bash curl openssl
+RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-186.0.0-linux-x86_64.tar.gz | tar -xzf -
+RUN /google-cloud-sdk/install.sh
+ENV PATH=/google-cloud-sdk/bin:$PATH
+RUN gcloud components install kubectl gsutil beta docker-credential-gcr
+RUN curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
