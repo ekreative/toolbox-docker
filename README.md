@@ -13,3 +13,4 @@ Actually now its got a bit more going on
   - docker-credential-gcr
   - kubectl
 - Includes [Helm](https://helm.sh/)
+- Includes [aws](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
