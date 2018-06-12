@@ -1,5 +1,5 @@
 FROM docker:latest
-RUN apk add --no-cache python2 bash curl openssl py-setuptools
+RUN apk add --no-cache python2 bash curl openssl py-setuptools git
 RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-197.0.0-linux-x86_64.tar.gz | tar -xzf -
 RUN /google-cloud-sdk/install.sh
 ENV PATH=/google-cloud-sdk/bin:$PATH
