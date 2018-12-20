@@ -1,10 +1,8 @@
-# Kubectl
+# Toolbox
 
-A very simple docker image with kubectl installed
+A small image with kubeclt and some related tools
 
-## More
-
-Actually now its got a bit more going on
+## Tools
 
 - Based on [`docker:latest`](https://hub.docker.com/_/docker/)
 - Includes [gcloud](https://cloud.google.com/sdk/docs/quickstart-linux) and some components
@@ -18,5 +16,5 @@ Actually now its got a bit more going on
 ## Build
 
 ```bash
-docker build -t ekreative/kubectl .
+docker build -t ekreative/toolbox .
 ```
