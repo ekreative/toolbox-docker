@@ -1,3 +1,8 @@
+FROM golang:1.9 as ecr-login
+RUN go get -ud github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login \
+    && cd /go/src/github.com/awslabs/amazon-ecr-credential-helper \
+    && make
+
 FROM docker:latest
 RUN apk add --no-cache python2 bash curl openssl py-setuptools git
 
@@ -26,6 +31,7 @@ RUN easy_install-2.7 pip
 # See latest version at https://pypi.org/project/awscli/
 ENV AWS_VERSION 1.16.89
 RUN pip install awscli==$AWS_VERSION
+COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 
 # See latest version at https://sentry.io/get-cli/
 ENV SENTRY_CLI_VERSION 1.37.3
