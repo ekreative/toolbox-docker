@@ -1,5 +1,5 @@
 FROM golang:1.9 as ecr-login
-RUN go get -ud github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login \
+RUN go get -u -d github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login \
     && cd /go/src/github.com/awslabs/amazon-ecr-credential-helper \
     && make
 
