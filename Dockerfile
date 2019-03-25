@@ -37,3 +37,8 @@ COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bi
 ENV SENTRY_CLI_VERSION 1.40.0
 RUN curl https://downloads.sentry-cdn.com/sentry-cli/$SENTRY_CLI_VERSION/sentry-cli-Linux-x86_64 > /usr/local/bin/sentry-cli
 RUN chmod 0755 /usr/local/bin/sentry-cli
+
+# See latest version https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+ENV AWS_IAM_AUTHENTICATOR_VERSION 1.11.5/2018-12-06
+RUN curl https://amazon-eks.s3-us-west-2.amazonaws.com/$AWS_IAM_AUTHENTICATOR_VERSION/bin/linux/amd64/aws-iam-authenticator > /usr/local/bin/aws-iam-authenticator
+RUN chmod 0755 /usr/local/bin/aws-iam-authenticator

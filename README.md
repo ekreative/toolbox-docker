@@ -12,6 +12,7 @@ A small image with kubeclt and some related tools
 - Includes [Helm](https://helm.sh/)
 - Includes [aws](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 - Includes [amazon-ecr-credential-helper)](https://github.com/awslabs/amazon-ecr-credential-helper)
+- Includes [aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator)
 - Includes git
 - Includes [sentry-cli](https://docs.sentry.io/cli/)
 
