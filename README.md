@@ -47,3 +47,12 @@ Add to `~/.docker/config.json`
 ```bash
 docker build -t ekreative/toolbox .
 ```
+
+### kubectl
+
+This image used to be called `ekreative/kubectl`, to update that as well 
+
+```bash
+docker tag ekreative/toolbox:latest ekreative/kubectl:latest
+docker push ekreative/kubectl:latest
+```
