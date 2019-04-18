@@ -10,7 +10,9 @@ RUN apk add --no-cache \
       curl \
       git \
       openssl \
-      python3
+      python2 \
+      py-setuptools \
+    && easy_install-2.7 pip
 
 # Find latest link at https://cloud.google.com/sdk/docs/downloads-versioned-archives
 ENV GCLOUD_SDK_VERSION 242.0.0
@@ -32,7 +34,7 @@ RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v$HELM_VERSION-linu
 
 # See latest version at https://pypi.org/project/awscli/
 ENV AWS_VERSION 1.16.142
-RUN pip3 install awscli==$AWS_VERSION
+RUN pip install awscli==$AWS_VERSION
 COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 
 # See latest version at https://sentry.io/get-cli/
