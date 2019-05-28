@@ -46,6 +46,7 @@ Add to `~/.docker/config.json`
 
 ```bash
 docker build -t ekreative/toolbox .
+docker push ekreative/toolbox:latest
 ```
 
 ### kubectl

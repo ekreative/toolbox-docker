@@ -28,7 +28,7 @@ RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_
     && chmod +x /usr/local/bin/kubectl
 
 # See latest version at https://github.com/helm/helm/releases
-ENV HELM_VERSION 2.14.0
+ENV HELM_VERSION 2.13.1
 RUN curl https://storage.googleapis.com/kubernetes-helm/helm-v$HELM_VERSION-linux-amd64.tar.gz | tar -xzf - --strip-components=1 -C /usr/local/bin linux-amd64/helm \
     && helm init --client-only
 
