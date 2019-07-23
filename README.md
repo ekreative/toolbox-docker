@@ -45,7 +45,7 @@ Add to `~/.docker/config.json`
 ## Build
 
 ```bash
-docker build -t ekreative/toolbox .
+docker build --pull -t ekreative/toolbox .
 docker push ekreative/toolbox:latest
 ```
 
