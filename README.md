@@ -45,7 +45,12 @@ Add to `~/.docker/config.json`
 ## Build
 
 ```bash
-docker build --pull -t ekreative/toolbox .
+./update
+docker build --pull -t ekreative/toolbox:helm-2 helm-2
+docker push ekreative/toolbox:helm-2
+docker build --pull -t ekreative/toolbox:helm-3 helm-3
+docker push ekreative/toolbox:helm-3
+docker tag ekreative/toolbox:helm-2 ekreative/toolbox:latest
 docker push ekreative/toolbox:latest
 ```
 
