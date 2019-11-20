@@ -1,6 +1,6 @@
 # Toolbox
 
-A small image with kubeclt and some related tools
+A small image with kubectl and some related tools
 
 ## Tools
 
@@ -9,7 +9,7 @@ A small image with kubeclt and some related tools
   - gsutil
   - beta
 - Includes [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- Includes [Helm](https://helm.sh/)
+- Includes [Helm](https://helm.sh/) - Currently `latest` is on helm 2, or the tag `helm-3`.
 - Includes [aws](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 - Includes [amazon-ecr-credential-helper](https://github.com/awslabs/amazon-ecr-credential-helper)
 - Includes [aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator)
