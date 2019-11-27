@@ -2,6 +2,11 @@
 
 A small image with kubectl and some related tools
 
+## Tags available
+
+* `latest`, `helm-2`
+* `helm-3`
+
 ## Tools
 
 - Based on [`docker:latest`](https://hub.docker.com/_/docker/)
