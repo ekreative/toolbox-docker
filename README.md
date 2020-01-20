@@ -20,6 +20,7 @@ A small image with kubectl and some related tools
 - Includes [aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator)
 - Includes git
 - Includes [sentry-cli](https://docs.sentry.io/cli/)
+- Includes [terraform](https://www.terraform.io)
 
 ## Use as ecr-login
 
