@@ -13,7 +13,6 @@ for helmVariant in "${!helm[@]}"; do
   rm -rf "$dir"
   mkdir -p "$dir"
   cp docker-config.json "$dir/"
-  cp terraformrc "$dir/"
 
   extraSed=''
   if [ "$helmVariant" != "2" ]; then

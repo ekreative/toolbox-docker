@@ -44,8 +44,7 @@ RUN curl https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_$
   && mv terraform /usr/local/bin/terraform \
   && chmod +x /usr/local/bin/terraform
 
-COPY --from=terraform-provider-k8s /go/bin/terraform-provider-k8s /root/go/bin/terraform-provider-k8s
-ADD terraformrc /root/.terraformrc
+COPY --from=terraform-provider-k8s /go/bin/terraform-provider-k8s /root/.terraform.d/plugins/terraform-provider-k8s
 
 # See latest version at https://pypi.org/project/awscli/
 ENV AWS_VERSION 1.17.12
