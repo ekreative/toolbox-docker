@@ -4,7 +4,7 @@ set -e
 # See latest version at https://github.com/helm/helm/releases
 declare -A helm=(
   ['2']='2.16.1'
-	['3']='3.0.2'
+	['3']='3.0.3'
 )
 
 for helmVariant in "${!helm[@]}"; do
@@ -13,6 +13,7 @@ for helmVariant in "${!helm[@]}"; do
   rm -rf "$dir"
   mkdir -p "$dir"
   cp docker-config.json "$dir/"
+  cp terraformrc "$dir/"
 
   extraSed=''
   if [ "$helmVariant" != "2" ]; then

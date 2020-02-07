@@ -1,8 +1,19 @@
+# Not sure if its possible to install a specific verison from
+# https://github.com/awslabs/amazon-ecr-credential-helper/releases
 FROM golang:1.13-alpine as ecr-login
 RUN apk add --no-cache git make bash
 RUN go get -u -d github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/docker-credential-ecr-login \
     && cd /go/src/github.com/awslabs/amazon-ecr-credential-helper \
     && make
+
+# k8s from yaml for terraform https://github.com/banzaicloud/terraform-provider-k8s/releases
+# Something about the versions of github.com/googleapis/gnostic means that
+# go get fails, but with this two step process it works...
+FROM golang:1.13-alpine as terraform-provider-k8s
+ENV GO111MODULE on
+RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.0 \
+  && cd /go/pkg/mod/github.com/banzaicloud/terraform-provider-k8s@v0.7.0 \
+  && go install
 
 FROM docker:latest
 RUN apk add --no-cache \
@@ -23,22 +34,26 @@ RUN curl https://downloads.sentry-cdn.com/sentry-cli/$SENTRY_CLI_VERSION/sentry-
     && chmod 0755 /usr/local/bin/sentry-cli
 
 # See latest version at https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.17.1
+ENV KUBECTL_VERSION 1.17.2
 RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_VERSION/bin/linux/amd64/kubectl > /usr/local/bin/kubectl \
     && chmod +x /usr/local/bin/kubectl
 
-ENV TERRAFORM_VERSION 0.12.19
+# See latest version at https://www.terraform.io/downloads.html
+ENV TERRAFORM_VERSION 0.12.20
 RUN curl https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip | unzip - \
   && mv terraform /usr/local/bin/terraform \
   && chmod +x /usr/local/bin/terraform
 
+COPY --from=terraform-provider-k8s /go/bin/terraform-provider-k8s /root/go/bin/terraform-provider-k8s
+ADD terraformrc /root/.terraformrc
+
 # See latest version at https://pypi.org/project/awscli/
-ENV AWS_VERSION 1.17.5
+ENV AWS_VERSION 1.17.12
 RUN pip3 install awscli==$AWS_VERSION
 COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 
 # Find latest link at https://cloud.google.com/sdk/docs/downloads-versioned-archives
-ENV GCLOUD_SDK_VERSION 276.0.0
+ENV GCLOUD_SDK_VERSION 279.0.0
 ENV PATH=/google-cloud-sdk/bin:$PATH
 RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz | tar -xzf - \
     && /google-cloud-sdk/install.sh \
@@ -46,7 +61,7 @@ RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud
 ADD docker-config.json /root/.docker/config.json
 
 # See latest version at https://github.com/helm/helm/releases
-ENV HELM_VERSION 3.0.2
+ENV HELM_VERSION 3.0.3
 RUN curl https://get.helm.sh/helm-v$HELM_VERSION-linux-amd64.tar.gz | tar -xzf - --strip-components=1 -C /usr/local/bin linux-amd64/helm
 ##<helm3>##
 RUN helm plugin install https://github.com/helm/helm-2to3
