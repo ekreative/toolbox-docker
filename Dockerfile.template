@@ -11,8 +11,8 @@ RUN go get -u -d github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/d
 # go get fails, but with this two step process it works...
 FROM golang:1.13-alpine as terraform-provider-k8s
 ENV GO111MODULE on
-RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.1 \
-  && cd /go/pkg/mod/github.com/banzaicloud/terraform-provider-k8s@v0.7.1 \
+RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.2 \
+  && cd /go/pkg/mod/github.com/banzaicloud/terraform-provider-k8s@v0.7.2 \
   && go install
 
 FROM docker:latest
