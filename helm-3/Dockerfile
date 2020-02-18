@@ -29,7 +29,7 @@ RUN curl https://amazon-eks.s3-us-west-2.amazonaws.com/$AWS_IAM_AUTHENTICATOR_VE
     && chmod 0755 /usr/local/bin/aws-iam-authenticator
 
 # See latest version at https://sentry.io/get-cli/
-ENV SENTRY_CLI_VERSION 1.50.0
+ENV SENTRY_CLI_VERSION 1.51.0
 RUN curl https://downloads.sentry-cdn.com/sentry-cli/$SENTRY_CLI_VERSION/sentry-cli-Linux-x86_64 > /usr/local/bin/sentry-cli \
     && chmod 0755 /usr/local/bin/sentry-cli
 
@@ -47,7 +47,7 @@ RUN curl https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_$
 COPY --from=terraform-provider-k8s /go/bin/terraform-provider-k8s /root/.terraform.d/plugins/terraform-provider-k8s
 
 # See latest version at https://pypi.org/project/awscli/
-ENV AWS_VERSION 1.17.15
+ENV AWS_VERSION 1.18.1
 RUN pip3 install awscli==$AWS_VERSION
 COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 
