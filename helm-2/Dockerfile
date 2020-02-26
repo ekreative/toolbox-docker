@@ -39,7 +39,7 @@ RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_
     && chmod +x /usr/local/bin/kubectl
 
 # See latest version at https://www.terraform.io/downloads.html
-ENV TERRAFORM_VERSION 0.12.20
+ENV TERRAFORM_VERSION 0.12.21
 RUN curl https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip | unzip - \
   && mv terraform /usr/local/bin/terraform \
   && chmod +x /usr/local/bin/terraform
@@ -47,12 +47,12 @@ RUN curl https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_$
 COPY --from=terraform-provider-k8s /go/bin/terraform-provider-k8s /root/.terraform.d/plugins/terraform-provider-k8s
 
 # See latest version at https://pypi.org/project/awscli/
-ENV AWS_VERSION 1.18.1
+ENV AWS_VERSION 1.18.7
 RUN pip3 install awscli==$AWS_VERSION
 COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 
 # Find latest link at https://cloud.google.com/sdk/docs/downloads-versioned-archives
-ENV GCLOUD_SDK_VERSION 280.0.0
+ENV GCLOUD_SDK_VERSION 282.0.0
 ENV PATH=/google-cloud-sdk/bin:$PATH
 RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz | tar -xzf - \
     && /google-cloud-sdk/install.sh \
