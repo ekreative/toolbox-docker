@@ -11,8 +11,8 @@ RUN go get -u -d github.com/awslabs/amazon-ecr-credential-helper/ecr-login/cli/d
 # go get fails, but with this two step process it works...
 FROM golang:1.14-alpine as terraform-provider-k8s
 ENV GO111MODULE on
-RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.4 \
-  && cd /go/pkg/mod/github.com/banzaicloud/terraform-provider-k8s@v0.7.4 \
+RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.5 \
+  && cd /go/pkg/mod/github.com/banzaicloud/terraform-provider-k8s@v0.7.5 \
   && go install
 
 FROM docker:latest
@@ -29,7 +29,7 @@ RUN curl https://amazon-eks.s3-us-west-2.amazonaws.com/$AWS_IAM_AUTHENTICATOR_VE
     && chmod 0755 /usr/local/bin/aws-iam-authenticator
 
 # See latest version at https://sentry.io/get-cli/
-ENV SENTRY_CLI_VERSION 1.51.1
+ENV SENTRY_CLI_VERSION 1.52.0
 RUN curl https://downloads.sentry-cdn.com/sentry-cli/$SENTRY_CLI_VERSION/sentry-cli-Linux-x86_64 > /usr/local/bin/sentry-cli \
     && chmod 0755 /usr/local/bin/sentry-cli
 
@@ -39,7 +39,7 @@ RUN curl -L https://storage.googleapis.com/kubernetes-release/release/v$KUBECTL_
     && chmod +x /usr/local/bin/kubectl
 
 # See latest version at https://www.terraform.io/downloads.html
-ENV TERRAFORM_VERSION 0.12.23
+ENV TERRAFORM_VERSION 0.12.24
 RUN curl https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_linux_amd64.zip | unzip - \
   && mv terraform /usr/local/bin/terraform \
   && chmod +x /usr/local/bin/terraform
@@ -47,12 +47,12 @@ RUN curl https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_$
 COPY --from=terraform-provider-k8s /go/bin/terraform-provider-k8s /root/.terraform.d/plugins/terraform-provider-k8s
 
 # See latest version at https://pypi.org/project/awscli/
-ENV AWS_VERSION 1.18.24
+ENV AWS_VERSION 1.18.31
 RUN pip3 install awscli==$AWS_VERSION
 COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 
 # Find latest link at https://cloud.google.com/sdk/docs/downloads-versioned-archives
-ENV GCLOUD_SDK_VERSION 285.0.0
+ENV GCLOUD_SDK_VERSION 286.0.0
 ENV PATH=/google-cloud-sdk/bin:$PATH
 RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz | tar -xzf - \
     && /google-cloud-sdk/install.sh \

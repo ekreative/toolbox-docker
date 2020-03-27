@@ -3,7 +3,7 @@ set -e
 
 # See latest version at https://github.com/helm/helm/releases
 declare -A helm=(
-  ['2']='2.16.3'
+  ['2']='2.16.5'
 	['3']='3.1.2'
 )
 
