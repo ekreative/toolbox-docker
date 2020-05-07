@@ -16,6 +16,7 @@ RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.6 \
   && go install
 
 FROM docker:latest
+SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN apk add --no-cache \
       bash \
       curl \
@@ -58,7 +59,7 @@ ENV PATH=/google-cloud-sdk/bin:$PATH
 RUN curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz | tar -xzf - \
     && /google-cloud-sdk/install.sh \
     && gcloud components install gsutil beta
-ADD docker-config.json /root/.docker/config.json
+COPY docker-config.json /root/.docker/config.json
 
 # See latest version at https://github.com/helm/helm/releases
 ENV HELM_VERSION 2.16.7
