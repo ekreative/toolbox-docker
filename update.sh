@@ -4,7 +4,7 @@ set -e
 # See latest version at https://github.com/helm/helm/releases
 declare -A helm=(
   ['2']='2.16.7'
-	['3']='3.2.0'
+  ['3']='3.2.0'
 )
 
 for helmVariant in "${!helm[@]}"; do
@@ -30,5 +30,5 @@ for helmVariant in "${!helm[@]}"; do
   sed -E '
     '"$extraSed"'
     s/%%HELM_VARIANT%%/'"${helm[$helmVariant]}"'/;
-  ' $template > "$dir/Dockerfile"
+  ' $template >"$dir/Dockerfile"
 done
