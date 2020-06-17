@@ -22,10 +22,13 @@ RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.7 \
 FROM docker:latest
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN apk add --no-cache \
+# Used by some scripts
       bash \
       curl \
       git \
+      jq \
       openssl \
+# Deps for installed tools, gcloud and aws
       python3 \
       py3-pip
 
