@@ -15,6 +15,10 @@ RUN go get -u -d github.com/banzaicloud/terraform-provider-k8s@v0.7.7 \
   && cd /go/pkg/mod/github.com/banzaicloud/terraform-provider-k8s@v0.7.7 \
   && go install
 
+# Currently version 2 doesnt support alpine linux
+# See latest version at https://hub.docker.com/r/amazon/aws-cli/tags
+# FROM amazon/aws-cli:2.0.23 as aws-cli
+
 FROM docker:latest
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 RUN apk add --no-cache \
@@ -22,7 +26,8 @@ RUN apk add --no-cache \
       curl \
       git \
       openssl \
-      python3
+      python3 \
+      py3-pip
 
 # See latest version https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
 ENV AWS_IAM_AUTHENTICATOR_VERSION 1.16.8/2020-04-16
@@ -51,6 +56,9 @@ COPY --from=terraform-provider-k8s /go/bin/terraform-provider-k8s /root/.terrafo
 # See latest version at https://pypi.org/project/awscli/
 ENV AWS_VERSION 1.18.81
 RUN pip3 install awscli==$AWS_VERSION
+#COPY --from=aws-cli /usr/local/aws-cli/ /usr/local/aws-cli/
+#COPY --from=aws-cli /usr/local/bin/aws /usr/local/bin/aws
+#COPY --from=aws-cli /usr/local/bin/aws_completer /usr/local/bin/aws_completer
 COPY --from=ecr-login /go/src/github.com/awslabs/amazon-ecr-credential-helper/bin/local/docker-credential-ecr-login /usr/local/bin/docker-credential-ecr-login
 
 # Find latest link at https://cloud.google.com/sdk/docs/downloads-versioned-archives
