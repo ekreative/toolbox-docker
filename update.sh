@@ -3,8 +3,8 @@ set -e
 
 # See latest version at https://github.com/helm/helm/releases
 declare -A helm=(
-  ['2']='2.16.12'
-  ['3']='3.3.4'
+  ['2']='2.17.0'
+  ['3']='3.4.0'
 )
 
 for helmVariant in "${!helm[@]}"; do
