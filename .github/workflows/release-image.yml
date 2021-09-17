@@ -90,6 +90,8 @@ jobs:
           images: ekreative/toolbox
           tags: |
             type=raw,value=${{ matrix.helm-version }}
+          flavor: |
+            latest=${{ toJSON(matrix.helm-version == 'helm-3' && github.ref == 'refs/heads/master') }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
