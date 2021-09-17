@@ -4,7 +4,7 @@ set -e
 # See latest version at https://github.com/helm/helm/releases
 declare -A helm=(
   ['2']='2.17.0'
-  ['3']='3.5.4'
+  ['3']='3.7.0'
 )
 
 for helmVariant in "${!helm[@]}"; do
