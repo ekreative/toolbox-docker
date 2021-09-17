@@ -4,8 +4,8 @@ A small image with kubectl and some related tools
 
 ## Tags available
 
-* `latest`, `helm-2`
-* `helm-3`
+* `latest`, `helm-3`
+* `helm-2`
 
 ## Tools
 
