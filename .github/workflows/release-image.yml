@@ -67,7 +67,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        helm-version: ['helm-2', 'helm-3']
+        helm-version: ['helm-3']
     needs: [checks-hadolint, checks-shfmt, checks-shellcheck, checks-update]
     steps:
       - name: Checkout repository
