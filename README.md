@@ -5,7 +5,7 @@ A small image with kubectl and some related tools
 ## Tags available
 
 * `latest`, `helm-3`
-* `helm-2`
+* `helm-2` (not supported)
 
 ## Tools
 
@@ -14,7 +14,7 @@ A small image with kubectl and some related tools
   - gsutil
   - beta
 - Includes [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- Includes [Helm](https://helm.sh/) - Currently `latest` is on helm 2, or the tag `helm-3`.
+- Includes [Helm](https://helm.sh/)
 - Includes [aws](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
 - Includes [amazon-ecr-credential-helper](https://github.com/awslabs/amazon-ecr-credential-helper)
 - Includes [aws-iam-authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator)
@@ -46,25 +46,4 @@ Add to `~/.docker/config.json`
     "${account}.dkr.ecr.${region}.amazonaws.com": "ecr-login"
   }
 }
-```
-
-## Build
-
-```bash
-./update
-docker build --pull -t ekreative/toolbox:helm-2 helm-2
-docker push ekreative/toolbox:helm-2
-docker build --pull -t ekreative/toolbox:helm-3 helm-3
-docker push ekreative/toolbox:helm-3
-docker tag ekreative/toolbox:helm-2 ekreative/toolbox:latest
-docker push ekreative/toolbox:latest
-```
-
-### kubectl
-
-This image used to be called `ekreative/kubectl`, to update that as well 
-
-```bash
-docker tag ekreative/toolbox:latest ekreative/kubectl:latest
-docker push ekreative/kubectl:latest
 ```
