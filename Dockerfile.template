@@ -48,6 +48,6 @@ RUN curl "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-clou
 COPY docker-config.json /root/.docker/config.json
 
 # See latest version at https://github.com/helm/helm/releases
-ENV HELM_VERSION=3.7.2
+ENV HELM_VERSION=3.8.0
 RUN curl "https://get.helm.sh/helm-v$HELM_VERSION-linux-amd64.tar.gz" | tar -xzf - --strip-components=1 -C /usr/local/bin linux-amd64/helm
 RUN helm plugin install https://github.com/helm/helm-2to3
