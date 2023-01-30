@@ -13,6 +13,7 @@ A small image with kubectl and some related tools
 - Includes [gcloud](https://cloud.google.com/sdk/docs/quickstart-linux) and some components
   - gsutil
   - beta
+  - gke-gcloud-auth-plugin
 - Includes [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - Includes [Helm](https://helm.sh/)
 - Includes [aws](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)

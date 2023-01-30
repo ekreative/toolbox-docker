@@ -45,8 +45,7 @@ ENV GCLOUD_SDK_VERSION=414.0.0
 ENV PATH=/google-cloud-sdk/bin:$PATH
 RUN curl "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-$GCLOUD_SDK_VERSION-linux-x86_64.tar.gz" | tar -xzf - \
     && /google-cloud-sdk/install.sh \
-    && gcloud components install gsutil beta \
-    && gcloud components install gke-gcloud-auth-plugin -q
+    && gcloud components install gsutil beta gke-gcloud-auth-plugin
 COPY docker-config.json /root/.docker/config.json
 
 # See latest version at https://github.com/helm/helm/releases
